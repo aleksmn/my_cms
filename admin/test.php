@@ -14,7 +14,7 @@
   <div class="foo"></div>
 
 <!--  tesing for git -->
-<!-- какашка -->
+
 
   <div id="bar">
     <ul>
