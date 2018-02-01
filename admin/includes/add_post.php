@@ -1,0 +1,78 @@
+<?php
+
+if(isset($_POST['create_post'])) {
+  
+  $post_title = $_POST['title'];
+  $post_author = $_POST['post-author'];
+  $post_category_id = $_POST['post-category-id'];
+  $post_status = $_POST['post-status'];
+  
+  $post_image = $_FILES['image']['name'];
+  $post_image_temp = $_FILES['image']['tmp_name'];
+
+  $post_tags = $_POST['post-tags'];
+  $post_content = $_POST['post-content'];
+
+  $post_date = date('d-m-y');
+  $post_comment_count = 4;  
+
+  move_uploaded_file($post_image_temp, "../images/$post_image" );
+
+  $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
+  $query .= "VALUES({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_comment_count}', '{$post_status}')";
+
+  $create_post_query = mysqli_query($connection, $query);
+
+ confirm($create_post_query);
+
+
+
+}
+
+?>
+
+
+
+
+<form action = '' method='post' enctype="multipart/form-data">
+
+<div class="form-group">
+  <label for="title">Title</label>
+  <input type="text" class="form-control" name="title">
+</div>
+
+<div class="form-group">
+  <label for="post-category-id">Post Category Id</label>
+  <input type="text" class="form-control" name="post-category-id">
+</div>
+
+<div class="form-group">
+  <label for="post-author">Post Author</label>
+  <input type="text" class="form-control" name="post-author">
+</div>
+
+<div class="form-group">
+  <label for="post-status">Post Status</label>
+  <input type="text" class="form-control" name="post-status">
+</div>
+
+<div class="form-group">
+  <label for="post-image">Post Image</label>
+  <input type="file" class="form-control" name="image">
+</div>
+
+<div class="form-group">
+  <label for="post-tags">Post Tags</label>
+  <input type="text" class="form-control" name="post-tags">
+</div>
+
+<div class="form-group">
+  <label for="post-content">Post Content</label>
+  <textarea class="form-control" name="post-content" id="" cols="30" rows="10"></textarea>
+</div>
+
+<div class="form-group">
+  <input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">
+</div>
+
+</form>
