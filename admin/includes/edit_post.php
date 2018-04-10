@@ -1,10 +1,11 @@
 <?php
 
-if(isset($_GET['p_id'])) {
+if(isset($_GET['p_id']) && $_GET['p_id']!='') {
   
   $the_post_id = $_GET['p_id'];
 
-}
+} 
+else die('Пост не выбран');
 
 
 
