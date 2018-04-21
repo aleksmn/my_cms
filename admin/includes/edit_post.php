@@ -51,6 +51,8 @@ if(isset($_POST['update_post'])) {
 
   }
 
+// UDDATE POST QUERY
+
   $query  = "UPDATE posts SET "; 
   $query .= "post_title = '{$post_title}', ";
   $query .= "post_category_id = '{$post_category_id}', ";
@@ -65,6 +67,8 @@ if(isset($_POST['update_post'])) {
   $update_post = mysqli_query($connection, $query);
 
   confirmQuery($update_post);
+
+  echo "<p class='bg-success'>Post updated. <a href='../post.php?p_id={$the_post_id}'>View post</a> or <a href='posts.php'>Edit more posts</a></p>";
 
 }
 
@@ -104,9 +108,31 @@ if(isset($_POST['update_post'])) {
 </div>
 
 <div class="form-group">
+  <label for="post_status">Post Status</label><br>
+  <select name="post_status" id="">
+
+    <option value="<?php echo $post_status; ?>"><?php echo $post_status; ?></option>
+    
+  <?php
+    if($post_status == 'published') {
+
+      echo "<option value='draft'>draft</option>";
+
+    } else {
+
+      echo "<option value='published'>published</option>";
+    }
+  ?>
+    
+
+  </select>
+</div>
+
+
+<!-- <div class="form-group">
   <label for="post_status">Post Status</label>
   <input value="<?php echo $post_status; ?>" type="text" class="form-control" name="post_status">
-</div>
+</div> -->
 
 <div class="form-group">
   <label for="post_image">Post Image</label><br>
